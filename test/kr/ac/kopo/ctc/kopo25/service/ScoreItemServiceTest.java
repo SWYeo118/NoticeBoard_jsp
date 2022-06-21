@@ -6,19 +6,17 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import kr.ac.kopo.ctc.kopo25.dao.ScoreItemDao;
-import kr.ac.kopo.ctc.kopo25.dao.ScoreItemDaoMock;
 import kr.ac.kopo.ctc.kopo25.dto.Pagination;
 
 class ScoreItemServiceTest {
 	// ScoreItemDaoImpl은 DB에 연결된 애니까 얘를 사용할 필요 없이 ScoreItemDaoMock이라는 가짜 데이터를 사용하자
-	private ScoreItemDao scoreItemDao = new ScoreItemDaoMock();
+//	private ScoreItemDao scoreItemDao = new ScoreItemDaoMock();
 	private ScoreItemService scoreItemService = new ScoreItemServiceImpl();
 	
 	@BeforeEach
-	void setUp() throws Exception {
-		scoreItemService.setScoreItemDao(scoreItemDao);
-	}
+//	void setUp() throws Exception {
+//		scoreItemService.setScoreItemDao(scoreItemDao);
+//	}
 
 	@AfterEach
 	void tearDown() throws Exception {
@@ -47,12 +45,12 @@ class ScoreItemServiceTest {
 	
 	@Test
 	   void testGetPagination3() {
-	      Pagination pagination = scoreItemService.getPagination(1, 15, 20, 1025);
+	      Pagination pagination = scoreItemService.getPagination(3, 10, 10, 58);
 	      assertEquals(1, pagination.getPpPage());
 	      assertEquals(1, pagination.getpPage());
-	      assertEquals(16, pagination.getnPage());
-	      assertEquals(52, pagination.getNnPage());
-	      assertEquals(1, pagination.getcPage());
+	      assertEquals(6, pagination.getnPage());
+	      assertEquals(6, pagination.getNnPage());
+	      assertEquals(3, pagination.getcPage());
 	   }
 	   
 	   @Test
@@ -67,12 +65,12 @@ class ScoreItemServiceTest {
 	   
 	   @Test
 	   void testGetPagination5() {
-	      Pagination pagination = scoreItemService.getPagination(100, 15, 20, 1025);
+	      Pagination pagination = scoreItemService.getPagination(17, 10, 10, 351);
 	      assertEquals(1, pagination.getPpPage());
-	      assertEquals(31, pagination.getpPage());
-	      assertEquals(52, pagination.getnPage());
-	      assertEquals(52, pagination.getNnPage());
-	      assertEquals(52, pagination.getcPage());
+	      assertEquals(1, pagination.getpPage());
+	      assertEquals(21, pagination.getnPage());
+	      assertEquals(36, pagination.getNnPage());
+	      assertEquals(17, pagination.getcPage());
 	   }
 	   
 	   @Test
@@ -162,14 +160,14 @@ class ScoreItemServiceTest {
 	
 
 
-	public ScoreItemDao getScoreItemDao() {
-		return scoreItemDao;
-	}
-
-
-
-	public void setScoreItemDao(ScoreItemDao scoreItemDao) {
-		this.scoreItemDao = scoreItemDao;
-	}
+//	public ScoreItemDao getScoreItemDao() {
+//		return scoreItemDao;
+//	}
+//
+//
+//
+//	public void setScoreItemDao(ScoreItemDao scoreItemDao) {
+//		this.scoreItemDao = scoreItemDao;
+//	}
 
 }

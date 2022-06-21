@@ -43,7 +43,7 @@ public class ScoreItemServiceImpl implements ScoreItemService {
 		int lastPage = (int) lastPage_d;
 		int firstPage = 1;
 		Pagination p = new Pagination();
-
+		
 		if (currPage <= 0) {
 			currPage = 1;
 		} else if (currPage > lastPage) {
@@ -80,6 +80,8 @@ public class ScoreItemServiceImpl implements ScoreItemService {
 				p.setpPage(1 + ((currPage / countPerPage) - 1) * countPerPage);
 			}
 		}
+		
+		
 		return p;
 	}
 }
