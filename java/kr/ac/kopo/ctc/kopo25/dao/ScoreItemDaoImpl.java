@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import kr.ac.kopo.ctc.kopo25.domain.ScoreItem;
 
@@ -23,7 +25,6 @@ public class ScoreItemDaoImpl implements ScoreItemDao {
 	public ScoreItem getOne(int studentid) {
 		ScoreItem scoreItem = new ScoreItem();
 		String sql = "SELECT * FROM examtable4 where studentid=?"; // sql문
-
 		try (Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/kopoctc", "root",
 				"CJDghd9311@"); PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setInt(1, studentid);
@@ -35,7 +36,6 @@ public class ScoreItemDaoImpl implements ScoreItemDao {
 				scoreItem.setEng(rs.getInt("eng"));
 				scoreItem.setMat(rs.getInt("mat"));
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// throw new IllegalStateException("db연결 실패" + e.getMessage());
@@ -44,7 +44,42 @@ public class ScoreItemDaoImpl implements ScoreItemDao {
 	}
 
 	@Override
-	public int getAll() {
+	public List<ScoreItem> selectAll(int page, int countPerPage) {
+		List<ScoreItem> results = new ArrayList<>();
+
+		String sql = "SELECT * FROM examtable4";
+		try (Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/kopoctc", "root", "CJDghd9311@");
+				Statement stmt = conn.createStatement();) {
+			try (ResultSet rs = stmt.executeQuery(sql)) {
+				while (rs.next()) {
+					String name = rs.getString(1);
+					int studentId = rs.getInt(2);
+					int kor = rs.getInt(3);
+					int eng = rs.getInt(4);
+					int mat = rs.getInt(5);
+
+					ScoreItem scoreItem = new ScoreItem();
+					scoreItem.setName(name);
+					scoreItem.setStudentId(studentId);
+					scoreItem.setKor(kor);
+					scoreItem.setEng(eng);
+					scoreItem.setMat(mat);
+
+					results.add(scoreItem);
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+//			throw new IllegalStateException("db 연결 실패");
+		}
+
+		return results;
+	}
+	
+	
+	@Override
+	public int getTotalCount() {
 		int num = 0;
 		String sql = "SELECT count(*) FROM examtable4"; // sql문
 		try (Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/kopoctc", "root",
@@ -75,7 +110,6 @@ public class ScoreItemDaoImpl implements ScoreItemDao {
 		} catch (SQLException e) {
 			throw new IllegalStateException("insert 실패" + e.getMessage());
 		}
-
 	}
 
 	@Override
@@ -107,18 +141,6 @@ public class ScoreItemDaoImpl implements ScoreItemDao {
 		} catch (SQLException e) {
 			throw new IllegalStateException("delete 실패 " + e.getMessage());
 		}
-	}
-
-	@Override
-	public ScoreItem create(ScoreItem scoreItem) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void delete(ScoreItem scoreItems) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

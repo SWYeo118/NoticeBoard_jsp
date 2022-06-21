@@ -17,10 +17,6 @@ public class ScoreItemServiceImpl implements ScoreItemService {
 		this.scoreItemDao = scoreItemDao;
 	}
 
-	@Override
-	public ScoreItem create(ScoreItem scoreItem) {
-		return scoreItemDao.create(scoreItem);
-	}
 
 	@Override
 	public ScoreItem selectOne(int id) {
