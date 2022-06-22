@@ -7,7 +7,7 @@
 <style lang="scss" scoped>
 .about {
   .msg {
-    font-size: 13px;
+    font-size: 30px;
     color: red;
   }
 }
