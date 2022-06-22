@@ -34,6 +34,7 @@ public class ScoreItemServiceImpl implements ScoreItemService {
 	// 10페이지씩 한다고 생각했을 때 1 ~ 10페이지에서 오른쪽 누르면 11페이지, 11 ~ 20에서 왼쪽 누르면 1페이지가 뜬다.
 	// 9에서 눌러도 11, 3에서 눌러도 11 . 13에서 눌러도 1 19에서 눌러도 1
 	@Override // 현재페이지curr, 쪽당 페이지countPPage, 페이지당 게시글수pageSize, 총 게시글totalCount
+	
 	public Pagination getPagination(int currPage, int countPerPage, int pageSize, int totalCount) {
 		double lastPage_d = Math.ceil(totalCount / (float) pageSize);
 		int lastPage = (int) lastPage_d;
@@ -76,7 +77,6 @@ public class ScoreItemServiceImpl implements ScoreItemService {
 				p.setpPage(1 + ((currPage / countPerPage) - 1) * countPerPage);
 			}
 		}
-		
 		
 		return p;
 	}
