@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import ThisIsVoteResult from "../views/ThisIsVoteResult.vue";
+// 해당 경로에 있는 파일들을 다음과 같은 이름으로 Import하였다.
+// App.vue의 경로와 동일하게 component 이름을 설정(name은 큰 의미가 없다)
 
 const routes = [
   {
