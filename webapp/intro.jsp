@@ -1,38 +1,28 @@
+<%@page import="kr.ac.kopo.ctc.kopo25.service.ScoreItemServiceImpl"%>
+<%@page import="kr.ac.kopo.ctc.kopo25.service.ScoreItemService"%>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@ page import="java.sql.*,javax.sql.*,java.io.*,java.net.*"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%
+ScoreItemService a = new ScoreItemServiceImpl();
+int data = a.retunViewNum();
+ServletContext context = getServletContext();
+context.setAttribute("data", data);
+%>
 <html>
-<!-html 태그로 작성됨을 알려주는 시작->
 <head>
-<!-글의 머리말->
 <meta charset="utf-8" />
-<!-UTF-8로 작성되었다는 것을 알려주어 한글이 안깨지게->
 </head>
 <body>
-	<!-본문->
-	<strong><center>
-			<h1>JSP Database 실습
+	<strong>
+		<center>
+			<h1>JSP Database 실습</h1>
 		</center>
-		</h1></strong>
-	<%
-	String data;
-	int cnt=0;
-	FileReader fl = new FileReader("/Users/sangwoo/Desktop/abc/cnt.txt");
-	StringBuffer sb = new StringBuffer();
-	int ch = 0;
-	while((ch = fl.read()) != -1){
-		sb.append((char)ch);
-	}
-	data=sb.toString().trim().replace("\n","");
-	fl.close();
-	cnt=Integer.parseInt(data);
-	cnt++;
-	data=Integer.toString(cnt);
-	out.println("<br><br><center>현재 홈페이지 방문조회수는 ["+data+"] 입니다</center></br>");
-	FileWriter fl2 = new FileWriter("/Users/sangwoo/Desktop/abc/cnt.txt",false);
-	fl2.write(data);
-	fl2.close();
-%>
+	</strong><br><br>
+	<center>
+		<c:out value="안녕하세요 현재 방문자 수는 [${data}]명입니다" />
+	</center>
+	</br>
 </body>
 </html>

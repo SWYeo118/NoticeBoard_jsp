@@ -1,11 +1,23 @@
-<%@ page errorPage="errorAllview.jsp" %>
-<%String code = request.getParameter("from");                     //from에서 값을 받아서 null값이면(주소가 wifi.jsp면)
-if (code == null) {                                          //sendRedirect으로 from1&cnt10으로 보내준다.
-   response.sendRedirect("AllviewDB.jsp?from=1&cnt=10");
-   } else { %>
+<%@page import="kr.ac.kopo.ctc.kopo25.dto.Score"%>
+<%@page import="kr.ac.kopo.ctc.kopo25.service.ScoreItemServiceImpl"%>
+<%@page import="kr.ac.kopo.ctc.kopo25.service.ScoreItemService"%>
 <meta http-equiv="Content-Type" content="text/html/css; charset=utf-8" />
 <%@ page contentType="text/html; charset=utf-8" %>
-<%@ page import="java.sql.*,javax.sql.*,java.io.*" %>
+<%@ page import="java.util.*,java.sql.*,javax.sql.*,java.io.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+ServletContext context = getServletContext();
+/* String code = request.getParameter("from"); //from에서 값을 받아서 null값이면(주소가 AllviewDB.jsp면)
+if (code == null) { //sendRedirect으로 from1&cnt10으로 보내준다.
+	response.sendRedirect("AllviewDB.jsp?from=1&cnt=10");
+} else { */
+	Score score = new Score();
+	ScoreItemService scoreitemservice = new ScoreItemServiceImpl();
+	List<Score> scoreViewDatas = scoreitemservice.allView();
+	context.setAttribute("scoreViewDatas", scoreViewDatas);
+/* 	int from = Integer.parseInt(request.getParameter("from"));
+	int cnt = Integer.parseInt(request.getParameter("cnt")); */
+%>
 <html>
 <head>
 <style type="text/css"> 
@@ -15,35 +27,27 @@ a { text-decoration:none }
 </head>
 <body>
 <h1><center>학생 전체 조회</center></h1>
-<%
-     Class.forName("com.mysql.jdbc.Driver"); 
-     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopoctc","root" , "CJDghd9311@");
-     Statement stmt = conn.createStatement();
-     int from = 0;           
-     //from값을 초기값 선언
-     float howmany = 0;
-     from = Integer.parseInt(request.getParameter("from"));            //getParameter로 쿼리스트링의 from값을 받아온다
-     int cnt = Integer.parseInt(request.getParameter("cnt"));
-     ResultSet rset2 = stmt.executeQuery("select count(*) from examtable4;"); 
-     while (rset2.next()) { 
-     howmany = rset2.getFloat(1);
-     }
-     int it = (int)(howmany / 10) + 1;
-     ResultSet rset = stmt.executeQuery("CALL print_score_report("+ (from - 1) +",10);"); 
-%>
 
 <table cellspacing=1 width=600 align=center border = 1>
 	<tr>
-		<td width=50><p align=center>이름</p></td>		<!-- 테이블을 만들고 중앙 정렬-->
+		<td width=50><p align=center>이름</p></td>
 		<td width=50><p align=center>학번</p></td>
 		<td width=50><p align=center>국어</p></td>
 		<td width=50><p align=center>영어</p></td>
 		<td width=50><p align=center>수학</p></td>
-		<td width=50><p align=center>총점</p></td>
-		<td width=50><p align=center>평균</p></td>
-		<td width=50><p align=center>등수</p></td>
 	</tr>
-<%
+		<c:forEach var="scoreViewData" items="${scoreViewDatas}">
+		<c:set var="i" value="1" />
+		<tr>
+		<td width=50><p align=center><c:out value="${scoreViewDatas[i].name}" /></p></td>
+		<td width=50><p align=center><c:out value="${scoreViewData.studentid}" /></p></td>
+		<td width=50><p align=center><c:out value="${scoreViewData.kor}" /></p></td>
+		<td width=50><p align=center><c:out value="${scoreViewData.eng}" /></p></td>
+		<td width=50><p align=center><c:out value="${scoreViewData.mat}" /></p></td>
+		</tr>
+		</c:forEach>
+
+<%-- <%
      while (rset.next()) { 
          out.println("<tr>");
 		 out.println("<td width=50><p align=center><a href='oneviewDB.jsp?key="		//각각의 값을가져오는데 이름을 누르면 onviewDB.jsp로 연결되어 1인만 조회하도록
@@ -93,7 +97,9 @@ out.println("<br>");
      rset.close(); 
      stmt.close(); 
      conn.close(); 
-%>
+%> --%>
 </body>
 </html>
-<% } %>
+<%
+	/* } */
+/* } */ %>
