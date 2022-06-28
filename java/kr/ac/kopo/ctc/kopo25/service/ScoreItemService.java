@@ -10,4 +10,5 @@ public interface ScoreItemService {
 	Pagination getPagination(int currPage, int countPerPage, int pageSize, int totalCount);
 	public int retunViewNum() throws IOException;
 	public List<Score> allView() throws IOException;
+	int getTotalCount();
 }

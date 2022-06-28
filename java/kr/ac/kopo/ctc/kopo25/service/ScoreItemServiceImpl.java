@@ -15,7 +15,7 @@ import kr.ac.kopo.ctc.kopo25.dto.Pagination;
 import kr.ac.kopo.ctc.kopo25.dto.Score;
 
 public class ScoreItemServiceImpl implements ScoreItemService {
-	
+
 	public ScoreItemServiceImpl() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver"); // jdbc Driver에 연결
@@ -23,7 +23,7 @@ public class ScoreItemServiceImpl implements ScoreItemService {
 			throw new IllegalStateException("jdbc 드라이버 로드 실패" + e); // 연결 실패 시 에러메세지
 		}
 	}
-	
+
 	@Override
 	public Pagination getPagination(int currPage, int countPerPage, int pageSize, int totalCount) {
 		double lastPage_d = Math.ceil(totalCount / (float) pageSize);
@@ -90,30 +90,29 @@ public class ScoreItemServiceImpl implements ScoreItemService {
 		int viewNum = Integer.parseInt(data);
 		return viewNum;
 	}
-	
+
 	@Override
 	public List<Score> allView() throws IOException {
 		List<Score> results = new ArrayList<>();
 
-		try (Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/kopoctc", "root", "CJDghd9311@");
-				Statement stmt = conn.createStatement();) {
-				ResultSet rs = stmt.executeQuery("SELECT * FROM examtable4");
-				
-				while (rs.next()) {
-					Score scoreItem = new Score();
-					String name = rs.getString(1);
-					int studentId = rs.getInt(2);
-					int kor = rs.getInt(3);
-					int eng = rs.getInt(4);
-					int mat = rs.getInt(5);
-					scoreItem.setName(name);
-					scoreItem.setStudentid(studentId);
-					scoreItem.setKor(kor);
-					scoreItem.setEng(eng);
-					scoreItem.setMat(mat);
-					results.add(scoreItem);
-			}
+		try (Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/kopoctc", "root",
+				"CJDghd9311@"); Statement stmt = conn.createStatement();) {
+			ResultSet rs = stmt.executeQuery("SELECT * FROM examtable4");
 
+			while (rs.next()) {
+				Score scoreItem = new Score();
+				String name = rs.getString(1);
+				int studentId = rs.getInt(2);
+				int kor = rs.getInt(3);
+				int eng = rs.getInt(4);
+				int mat = rs.getInt(5);
+				scoreItem.setName(name);
+				scoreItem.setStudentid(studentId);
+				scoreItem.setKor(kor);
+				scoreItem.setEng(eng);
+				scoreItem.setMat(mat);
+				results.add(scoreItem);
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -121,9 +120,21 @@ public class ScoreItemServiceImpl implements ScoreItemService {
 		return results;
 	}
 
+	@Override
+	public int getTotalCount() {
+		int num = 0;
+		String sql = "SELECT count(*) FROM examtable4"; // sql문
+		try (Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/kopoctc", "root",
+				"CJDghd9311@"); Statement stmt = conn.createStatement();) {
+			ResultSet rs = stmt.executeQuery(sql); // ResultSet에 가져온 데이터 저장.
+			rs.next();
+			num = rs.getInt(1);
+		} catch (SQLException e) {
+			throw new IllegalStateException("db연결 실패" + e.getMessage());
+		}
+		return num;
+	}
 }
-
-
 
 //<%
 //while (rset.next()) { 
