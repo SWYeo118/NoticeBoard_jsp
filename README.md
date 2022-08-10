@@ -1,2 +1,2 @@
-# Eclipse_server_spring
-## Spring test by Eclipse
+# jsp로 게시판을 만드는 연습
+## Vue.js도 일부 연습
