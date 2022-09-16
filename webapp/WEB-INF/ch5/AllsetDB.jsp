@@ -10,7 +10,7 @@
 <h1>테이블 데이터 입력 완료</h1>
 <%
      Class.forName("com.mysql.jdbc.Driver"); 
-     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopoctc","root" , "CJDghd9311@");
+     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopoctc","root" , "");
      Statement stmt = conn.createStatement();
      stmt.execute("insert into examtable4 (name, studentid, kor, eng, mat) values('나연', 209901, 95,100,95)"); // 각각의 데이터 입력 쿼리
 	 stmt.execute("insert into examtable4 (name, studentid, kor, eng, mat) values('정연', 209902, 95,95,95)");
