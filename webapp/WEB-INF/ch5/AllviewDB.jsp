@@ -17,7 +17,7 @@ a { text-decoration:none }
 <h1><center>학생 전체 조회</center></h1>
 <%
      Class.forName("com.mysql.jdbc.Driver"); 
-     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopoctc","root" , "CJDghd9311@");
+     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopoctc","root" , "");
      Statement stmt = conn.createStatement();
      int from = 0;           
      //from값을 초기값 선언
