@@ -10,7 +10,7 @@
 <h1>테이블 생성 완료</h1>
 <%
      Class.forName("com.mysql.jdbc.Driver"); 		//jdbc 드라이버 사용
-     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopoctc","root" , "CJDghd9311@");
+     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopoctc","root" , "");
 													//Mysql DB의 주소와 아이디와 비밀번호
      Statement stmt = conn.createStatement(); 
      stmt.execute("create table examtable4("+"name varchar(20),"+ "studentid int not null primary key,"+ "kor int,"+ "eng int,"+ "mat int)"); 
