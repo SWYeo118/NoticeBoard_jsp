@@ -10,7 +10,7 @@
 <h1>레코드 수정 완료</h1>
 <%
     Class.forName("com.mysql.jdbc.Driver"); 
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopoctc","root" , "CJDghd9311@");
+    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopoctc","root" , "");
     Statement stmt = conn.createStatement(); 
 	String cTmp = request.getParameter("name");		// 이름에서 cTmp값을 받아오고 
 	String cTmpHan = new String(cTmp.getBytes("8859_1"),"utf-8"); //cTmp값을 UTF-8로 변환해서 cTmpHan으로 한다.
