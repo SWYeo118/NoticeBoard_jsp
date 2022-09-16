@@ -8,7 +8,7 @@
 <body>
 <%
      Class.forName("com.mysql.jdbc.Driver"); 
-     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopoctc","root" , "CJDghd9311@");
+     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopoctc","root" , "");
      Statement stmt = conn.createStatement(); 
 	 String ckey = request.getParameter("key");
      ResultSet rset = stmt.executeQuery("select * from examtable4 where name = '"+ckey+"';"); 	//클릭하면 click key를 받아서 해당 사람만 조회하도록
