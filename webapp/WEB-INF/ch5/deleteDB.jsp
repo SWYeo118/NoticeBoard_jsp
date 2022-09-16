@@ -10,7 +10,7 @@
 <h1>레코드 삭제 완료</h1>
 <%
     Class.forName("com.mysql.jdbc.Driver"); 
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopoctc","root" , "CJDghd9311@");
+    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopoctc","root" , "");
     Statement stmt = conn.createStatement(); 
 	String ctmp = request.getParameter("studentid");
 	String sql = "delete from examtable4 where studentid = " + ctmp;
