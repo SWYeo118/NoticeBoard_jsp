@@ -10,7 +10,7 @@
 <h1>테이블 삭제 완료</h1>
 <%
      Class.forName("com.mysql.jdbc.Driver"); 
-     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopoctc","root" , "CJDghd9311@");
+     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopoctc","root" , "");
      Statement stmt = conn.createStatement(); 
      stmt.execute("drop table examtable4");			// 테이블 삭제 쿼리
      stmt.close(); 
