@@ -29,7 +29,7 @@ function submitForm(mode){				//submitform이라는 함수 정의
 <body>
 <%
     Class.forName("com.mysql.jdbc.Driver"); 	// JDBC driver
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopoctc","root" , "CJDghd9311@");
+    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopoctc","root" , "");
     											// DB 연결 주소, 아이디, 비밀번호 
     Statement stmt = conn.createStatement(); 	// Statement 선언 
 	String name="", studentid="", kor="", eng="", mat="", sum="", avg="", ran=""; //이름, 학번, 국어, 영어, 수학 점수 기본값 정의 
