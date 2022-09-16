@@ -10,7 +10,7 @@
 <body>
 <%
     Class.forName("com.mysql.jdbc.Driver"); 
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopoctc","root" , "CJDghd9311@");
+    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopoctc","root" , "");
     Statement stmt = conn.createStatement(); 
 	int NewStdId = 0;
     int cnt = 1;
