@@ -26,7 +26,7 @@ public class ScoreItemDaoImpl implements ScoreItemDao {
 		ScoreItem scoreItem = new ScoreItem();
 		String sql = "SELECT * FROM examtable4 where studentid=?"; // sql문
 		try (Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/kopoctc", "root",
-				"CJDghd9311@"); PreparedStatement stmt = conn.prepareStatement(sql);) {
+				""); PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setInt(1, studentid);
 			try (ResultSet rs = stmt.executeQuery();) {
 				rs.next();
@@ -48,7 +48,7 @@ public class ScoreItemDaoImpl implements ScoreItemDao {
 		List<ScoreItem> results = new ArrayList<>();
 
 		String sql = "SELECT * FROM examtable4";
-		try (Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/kopoctc", "root", "CJDghd9311@");
+		try (Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/kopoctc", "root", "");
 				Statement stmt = conn.createStatement();) {
 			try (ResultSet rs = stmt.executeQuery(sql)) {
 				while (rs.next()) {
@@ -83,7 +83,7 @@ public class ScoreItemDaoImpl implements ScoreItemDao {
 		int num = 0;
 		String sql = "SELECT count(*) FROM examtable4"; // sql문
 		try (Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/kopoctc", "root",
-				"CJDghd9311@"); Statement stmt = conn.createStatement();) {
+				""); Statement stmt = conn.createStatement();) {
 			ResultSet rs = stmt.executeQuery(sql); // ResultSet에 가져온 데이터 저장.
 			rs.next();
 			num = rs.getInt(1);
@@ -99,7 +99,7 @@ public class ScoreItemDaoImpl implements ScoreItemDao {
 		// 동적 쿼리 생성
 		String sql = "INSERT INTO examtable4 VALUES (?, ?, ?, ?, ?)";
 		try (Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/kopoctc", "root",
-				"CJDghd9311@"); PreparedStatement stmt = conn.prepareStatement(sql);) {
+				""); PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setString(1, scoreItems.getName());
 			stmt.setInt(2, scoreItems.getStudentId());
 			stmt.setInt(3, scoreItems.getKor());
@@ -116,7 +116,7 @@ public class ScoreItemDaoImpl implements ScoreItemDao {
 	public void update(ScoreItem scoreItems) {
 		String sql = "UPDATE examtable4 SET name=?, kor=?, eng=?, mat=? where studentid=?";
 		try (Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/kopoctc", "root",
-				"CJDghd9311@"); PreparedStatement stmt = conn.prepareStatement(sql);) {
+				""); PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setString(1, scoreItems.getName());
 			stmt.setInt(2, scoreItems.getKor());
 			stmt.setInt(3, scoreItems.getEng());
@@ -134,7 +134,7 @@ public class ScoreItemDaoImpl implements ScoreItemDao {
 	public void delete(int studentid) {
 		String sql = "DELETE FROM examtable4 WHERE studentid=?";
 		try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kopoctc", "root",
-				"CJDghd9311@"); PreparedStatement stmt = conn.prepareStatement(sql);) {
+				""); PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setInt(1, studentid);
 			// 0보다 크면 insert 됨
 			stmt.executeUpdate();
